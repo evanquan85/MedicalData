@@ -2,14 +2,12 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
-
 # 1
-df = None
-
+df = pd.read_csv('medical_examination.csv')
 # 2
-df['overweight'] = None
-
-# 3
+df['overweight'] = (df['weight']/((df['height']/100)**2)) > 25
+df['overweight'] = df['overweight'].replace({True: 1, False: 0})
+# 3 0 = always good, 1 = always bad
 
 
 # 4
