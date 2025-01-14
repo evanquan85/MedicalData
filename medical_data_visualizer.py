@@ -4,29 +4,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 # 1
 df = pd.read_csv('medical_examination.csv')
+print(df.columns)
 # 2
 df['overweight'] = (df['weight']/((df['height']/100)**2)) > 25
 df['overweight'] = df['overweight'].replace({True: 1, False: 0})
 # 3 0 = always good, 1 = always bad
-
-
+df['cholesterol'] = df['cholesterol'].map(lambda x: 0 if x == 1 else 1)
+df['gluc'] = df['gluc'].map(lambda x: 0 if x == 1 else 1)
 # 4
 def draw_cat_plot():
     # 5
-    df_cat = None
-
 
     # 6
-    df_cat = None
-    
 
     # 7
 
-
-
     # 8
-    fig = None
-
 
     # 9
     fig.savefig('catplot.png')
@@ -36,18 +29,23 @@ def draw_cat_plot():
 # 10
 def draw_heat_map():
     # 11
-    df_heat = None
+    df_heat = df[
+        (df['ap_lo'] <= df['ap_hi']) &
+        (df['height'] >= df['height'].quantile(0.025)) &
+        (df['height'] <= df['height'].quantile(0.975)) &
+        (df['weight'] >= df['weight'].quantile(0.025)) &
+        (df['weight'] <= df['weight'].quantile(0.975))
+    ]
 
     # 12
-    corr = None
+    corr = round(df_heat.corr(), 2)
 
     # 13
-    mask = None
 
 
 
     # 14
-    fig, ax = None
+
 
     # 15
 
